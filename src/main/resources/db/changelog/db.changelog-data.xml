@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!--
+    Included changelogs are run in the order they are found so care does need to be taken to make sure
+    that the included changelogs are either completely independent, or that any required changelogs are
+    run first.
+    https://docs.liquibase.com/concepts/advanced/include.html
+    -->
+</databaseChangeLog>

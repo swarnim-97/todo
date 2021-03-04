@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+<!--    <changeSet id="swarnim-1" author="swarnim">-->
+<!--        <createTable tableName="">-->
+<!--            <column></column>-->
+<!--        </createTable>-->
+<!--        <sql>-->
+<!--            CREATE TABLE user (-->
+<!--                id BIGINT,-->
+<!--                phone_number varchar,-->
+<!--                name VARCHAR,-->
+<!--                email VARCHAR,-->
+<!--                password VARCHAR,-->
+<!--                active BOOLEAN,-->
+<!--                deleted BOOLEAN,-->
+<!--                PRIMARY KEY (id)-->
+<!--            );-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="swarnim-2" author="swarnim">-->
+<!--        <sql>-->
+<!--            CREATE TABLE note(-->
+<!--                id BIGINT,-->
+<!--                note text,-->
+<!--                user_id BIGINT,-->
+<!--                PRIMARY KEY (id),-->
+<!--                constraint user_id_fk FOREIGN KEY (user_id) references USER(id)-->
+<!--            );-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+
+    <changeSet id="swarnim-1" author="swarnim">
+        <createTable tableName="location">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="location_pk"></constraints>
+            </column>
+            <column name="latitude" type="DECIMAL"/>
+            <column name="longitude" type="DECIMAL"/>
+            <column name="created_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="swarnim-2" author="swarnim">
+        <createTable tableName="device">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="device_pk"></constraints>
+            </column>
+            <column name="device_type" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+<!--            Device type column will be an enum of mobile, browser, desktop-->
+            <column name="device_make" type="varchar"/>
+            <column name="device_model" type="varchar"/>
+            <column name="os" type="varchar"/>
+            <column name="os_version" type="varchar"/>
+            <column name="identifier_type" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+<!--            identifier type will be an enum of imei, deviceid, ip-->
+            <column name="identification_number" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" type="Boolean"/>
+            <column name="deleted_time" type="TIMESTAMP"/>
+            <column name="created_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="swarnim-3" author="swarnim">
+        <createTable tableName="session">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="session_pk"/>
+            </column>
+            <column name="source" type="varchar"></column>
+<!--            column name source is used to store that from which source the session has been created.
+                For e.g: web, android, ios.
+                In future change the source type from varchar to of type enum source.-->
+            <column name="session_id" type="varchar" defaultOnNull="false"></column>
+            <column name="deleted" type="boolean"></column>
+            <column name="created_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="deleted_time" type="TIMESTAMP"/>
+            <column name="device_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="constraint_fk_device_id" referencedTableName="device"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="location_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="constraint_fk_location_id" referencedTableName="location"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="swarnim-4" author="swarnim">
+        <createTable tableName="user">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="user_pk"/>
+            </column>
+            <column name="name" type="varchar"></column>
+            <column name="username" type="varchar" defaultOnNull="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar" defaultOnNull="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" type="BOOLEAN"></column>
+            <column name="is_active" type="BOOLEAN"></column>
+            <column name="created_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted_time" type="TIMESTAMP"></column>
+        </createTable>
+    </changeSet>
+    <changeSet id="swarnim-5" author="swarnim">
+        <createTable tableName="notes">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="notes_pk"/>
+            </column>
+            <column name="note" type="varchar"/>
+            <column name="deleted" type="BOOLEAN"/>
+            <column name="created_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="constrain_fk_user_id" referencedTableName="user"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
