@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *  link:- https://thepracticaldeveloper.com/custom-error-handling-rest-controllers-spring-boot/
@@ -78,7 +75,7 @@ public class ErrorMaster {
                            final String errorReportUri) {
             this.code = code;
             this.message = message;
-            this.errors = List.of(
+            this.errors = Arrays.asList(
                     new Error(domain, reason, errorMessage, errorReportUri)
             );
         }
