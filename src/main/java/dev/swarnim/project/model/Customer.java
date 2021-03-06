@@ -2,11 +2,15 @@ package dev.swarnim.project.model;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
-public class User {
-    private Long phoneNumber;
+public class Customer {
+    @NotBlank
     private String name;
-    private String email;
+    @NotBlank
+    private String userName;
+    @NotBlank
     private String password;
     private Boolean active;
     private Boolean deleted;

@@ -3,7 +3,8 @@ package dev.swarnim.project.service;
 import dev.swarnim.project.database.DeviceDao;
 import dev.swarnim.project.database.LocationDao;
 import dev.swarnim.project.database.SessionDao;
-import dev.swarnim.project.database.UserDao;
+import dev.swarnim.project.database.CustomerDao;
+import dev.swarnim.project.model.Customer;
 import dev.swarnim.project.model.request.Device;
 import dev.swarnim.project.model.request.Location;
 import dev.swarnim.project.model.request.SessionRequest;
@@ -18,16 +19,16 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    private final UserDao userDao;
+    private final CustomerDao customerDao;
     private final DeviceDao deviceDao;
     private final LocationDao locationDao;
     private final SessionDao sessionDao;
 
     @Autowired
-    public UserService(UserDao userDao,
+    public UserService(CustomerDao customerDao,
                        DeviceDao deviceDao,
                        LocationDao locationDao, SessionDao sessionDao) {
-        this.userDao = userDao;
+        this.customerDao = customerDao;
         this.deviceDao = deviceDao;
         this.locationDao = locationDao;
         this.sessionDao = sessionDao;
@@ -61,5 +62,16 @@ public class UserService {
         String sessionId = UUID.randomUUID().toString();
         sessionDao.createNewSession(sessionRequest.getSource().toString(), sessionId, deviceId, locationId);
         return Session.builder().sessionId(sessionId).build();
+    }
+
+    public void createUser(Customer customer){
+        if(customer.getUserName() == null || customer.getName() == null || customer.getPassword() == null){
+            System.out.println("throw error");
+        }
+        boolean isUserPresent = customerDao.findIfCustomerExist(customer.getUserName());
+
+        if(isUserPresent){
+            System.out.println("throw error with message user alredy prpesent");
+        }
     }
 }
