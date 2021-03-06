@@ -5,36 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-<!--    <changeSet id="swarnim-1" author="swarnim">-->
-<!--        <createTable tableName="">-->
-<!--            <column></column>-->
-<!--        </createTable>-->
-<!--        <sql>-->
-<!--            CREATE TABLE customer (-->
-<!--                id BIGINT,-->
-<!--                phone_number varchar,-->
-<!--                name VARCHAR,-->
-<!--                email VARCHAR,-->
-<!--                password VARCHAR,-->
-<!--                active BOOLEAN,-->
-<!--                deleted BOOLEAN,-->
-<!--                PRIMARY KEY (id)-->
-<!--            );-->
-<!--        </sql>-->
-<!--    </changeSet>-->
-
-<!--    <changeSet id="swarnim-2" author="swarnim">-->
-<!--        <sql>-->
-<!--            CREATE TABLE note(-->
-<!--                id BIGINT,-->
-<!--                note text,-->
-<!--                user_id BIGINT,-->
-<!--                PRIMARY KEY (id),-->
-<!--                constraint user_id_fk FOREIGN KEY (user_id) references USER(id)-->
-<!--            );-->
-<!--        </sql>-->
-<!--    </changeSet>-->
-
     <changeSet id="swarnim-1" author="swarnim">
         <createTable tableName="location">
             <column name="id" type="BIGINT" autoIncrement="true">
