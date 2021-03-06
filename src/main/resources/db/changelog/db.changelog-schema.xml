@@ -68,7 +68,7 @@
             <column name="identification_number" type="varchar">
                 <constraints nullable="false"/>
             </column>
-            <column name="deleted" type="Boolean"/>
+            <column name="deleted" type="Boolean" defaultValueBoolean="false"/>
             <column name="deleted_time" type="TIMESTAMP"/>
             <column name="created_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
@@ -89,7 +89,7 @@
                 For e.g: web, android, ios.
                 In future change the source type from varchar to of type enum source.-->
             <column name="session_id" type="varchar" defaultOnNull="false"></column>
-            <column name="deleted" type="boolean"></column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"></column>
             <column name="created_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
             <column name="deleted_time" type="TIMESTAMP"/>
@@ -115,8 +115,8 @@
             <column name="password" type="varchar" defaultOnNull="false">
                 <constraints nullable="false"/>
             </column>
-            <column name="deleted" type="BOOLEAN"></column>
-            <column name="is_active" type="BOOLEAN"></column>
+            <column name="deleted" type="BOOLEAN" defaultValueBoolean="false"></column>
+            <column name="is_active" type="BOOLEAN" defaultValueBoolean="true"></column>
             <column name="created_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
@@ -132,7 +132,7 @@
                 <constraints primaryKey="true" primaryKeyName="notes_pk"/>
             </column>
             <column name="note" type="varchar"/>
-            <column name="deleted" type="BOOLEAN"/>
+            <column name="deleted" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="created_time" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>

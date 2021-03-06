@@ -4,6 +4,9 @@ import dev.swarnim.project.database.DeviceDao;
 import dev.swarnim.project.database.LocationDao;
 import dev.swarnim.project.database.SessionDao;
 import dev.swarnim.project.database.CustomerDao;
+import dev.swarnim.project.errorhandler.InvalidArgumentException;
+import dev.swarnim.project.errorhandler.TodoApplicationValidationFailedException;
+import dev.swarnim.project.errorhandler.TodoErrorCodes;
 import dev.swarnim.project.model.Customer;
 import dev.swarnim.project.model.request.Device;
 import dev.swarnim.project.model.request.Location;
@@ -66,12 +69,15 @@ public class UserService {
 
     public void createUser(Customer customer){
         if(customer.getUserName() == null || customer.getName() == null || customer.getPassword() == null){
-            System.out.println("throw error");
+            throw new InvalidArgumentException(TodoErrorCodes.TODO0001);
         }
         boolean isUserPresent = customerDao.findIfCustomerExist(customer.getUserName());
 
         if(isUserPresent){
-            System.out.println("throw error with message user alredy prpesent");
+            log.info("User already present with username {}", customer.getUserName());
+            throw new InvalidArgumentException(TodoErrorCodes.TODO0002);
         }
+
+        customerDao.createUser(customer.getName(), customer.getUserName(), customer.getPassword());
     }
 }
