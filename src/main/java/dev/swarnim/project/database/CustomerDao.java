@@ -21,4 +21,7 @@ public interface CustomerDao {
                    String username,
                    String password);
 
+    @SqlQuery("SELECT password from customer where username=:username")
+    String findCustomerPassword(String username);
+
 }

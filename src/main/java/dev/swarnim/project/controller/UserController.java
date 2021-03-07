@@ -33,4 +33,9 @@ public class UserController extends V1BaseController{
     private void createUser(@Valid @RequestBody Customer customer){
         userService.createUser(customer);
     }
+
+    @PostMapping("/login")
+    private void login(@Valid @RequestBody Customer customer){
+        userService.loginUser(customer);
+    }
 }

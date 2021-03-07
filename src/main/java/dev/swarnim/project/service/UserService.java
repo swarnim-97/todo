@@ -80,4 +80,21 @@ public class UserService {
 
         customerDao.createUser(customer.getName(), customer.getUserName(), customer.getPassword());
     }
+
+    public void loginUser(Customer customer){
+        log.info("login request for username: {}", customer.getUserName());
+        if(customer.getUserName() == null || customer.getPassword() == null){
+            throw new InvalidArgumentException(TodoErrorCodes.TODO0001);
+        }
+
+        if(!customerDao.findIfCustomerExist(customer.getUserName())){
+            throw new InvalidArgumentException(TodoErrorCodes.TODO0003);
+        }
+        log.info("customer exists.");
+
+        String password = customerDao.findCustomerPassword(customer.getUserName());
+        if(!password.equals(customer.getPassword())){
+            throw new InvalidArgumentException(TodoErrorCodes.TODO0004);
+        }
+    }
 }
