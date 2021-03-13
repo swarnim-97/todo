@@ -115,5 +115,10 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="swarnim-6" author="swarnim">
+        <sql>
+            ALTER TABLE session ALTER COLUMN location_id DROP NOT NULL;
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>

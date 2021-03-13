@@ -30,7 +30,8 @@ public class UserService {
     @Autowired
     public UserService(CustomerDao customerDao,
                        DeviceDao deviceDao,
-                       LocationDao locationDao, SessionDao sessionDao) {
+                       LocationDao locationDao,
+                       SessionDao sessionDao) {
         this.customerDao = customerDao;
         this.deviceDao = deviceDao;
         this.locationDao = locationDao;
@@ -55,15 +56,8 @@ public class UserService {
                     device.getIdentifierType().name(),
                     device.getIdentificationNumber());
         }
-
-        Location location = sessionRequest.getLocation();
-        Location existingLocation = locationDao.findLocationByLatAndLong(location.getLatitude(), location.getLongitude());
-        Long locationId = existingLocation != null ? existingLocation.getId() : null;
-        if(existingLocation == null){
-            locationId = locationDao.createNewLocation(location.getLatitude(), location.getLongitude());
-        }
         String sessionId = UUID.randomUUID().toString();
-        sessionDao.createNewSession(sessionRequest.getSource().toString(), sessionId, deviceId, locationId);
+        sessionDao.createNewSession(sessionRequest.getSource().toString(), sessionId, deviceId, null);
         return Session.builder().sessionId(sessionId).build();
     }
 
