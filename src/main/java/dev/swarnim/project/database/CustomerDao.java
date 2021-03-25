@@ -24,4 +24,7 @@ public interface CustomerDao {
     @SqlQuery("SELECT password from customer where username=:username")
     String findCustomerPassword(String username);
 
+    @SqlQuery("SELECT EXISTS (SELECT 1 from customer where id=:customerId)")
+    boolean checkIfCustomerExists(Long customerId);
+
 }

@@ -1,9 +1,6 @@
 package dev.swarnim.project.configuration;
 
-import dev.swarnim.project.database.DeviceDao;
-import dev.swarnim.project.database.LocationDao;
-import dev.swarnim.project.database.SessionDao;
-import dev.swarnim.project.database.CustomerDao;
+import dev.swarnim.project.database.*;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.spi.JdbiPlugin;
@@ -82,5 +79,8 @@ public class JdbiConfiguration {
     public SessionDao sessionDao(Jdbi jdbi){
         return jdbi.onDemand(SessionDao.class);
     }
+
+    @Bean
+    public NoteDao noteDao(Jdbi jdbi) {return jdbi.onDemand(NoteDao.class);}
 
 }

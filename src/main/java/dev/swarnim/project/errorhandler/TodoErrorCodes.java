@@ -6,6 +6,7 @@ public enum TodoErrorCodes {
     TODO0002("TODO0002", "Username already exists."),
     TODO0003("TODO0003", "Username not exists."),
     TODO0004("TODO0004", "Password not matched."),
+    TODO0005("TODO0005", "Customer Not exists."),
     ;
     private String errorCode;
     private String errorMessage;
